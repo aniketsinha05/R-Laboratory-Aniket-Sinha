@@ -252,4 +252,34 @@ tbl<- with(adult,table(native_country,income))
 prop_over50k <- tbl[2,">=50k"] / rowSums(tbl)
 prop_over50k
 ?rowSums
-                                         
+
+
+
+# Load the IPL dataset
+# Load the IPL dataset
+ipl <- read.csv("batting_bowling_ipl_bat.csv")
+
+# Display the first 10 rows
+head(ipl, 10)
+
+# Top 5 players with highest total runs
+top5_runs <- ipl[order(-ipl$Runs), c("Name", "Runs")]
+head(top5_runs, 5)
+
+# Player with highest batting average
+ipl[which.max(ipl$Ave), c("Name", "Ave")]
+
+# Bar chart for Top 10 players by Strike Rate
+top10_sr <- ipl[order(-ipl$SR), c("Name", "SR")]
+top10_sr <- head(top10_sr, 10)
+
+barplot(top10_sr$SR,
+        names.arg = top10_sr$Name,
+        las = 2,
+        col = "skyblue",
+        main = "Top 10 Players by Strike Rate",
+        ylab = "Strike Rate")
+
+# Correlation between Runs and Fours (as Matches column not available)
+cor(ipl$Runs, ipl$Fours, use = "complete.obs")
+
